@@ -38,7 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         cell.classList.remove('banderita')
                     } else {
                         cell.classList.add('banderita')
-                    }                }
+                    }                
+                }
             });
             
             cell.addEventListener('contextmenu', flagCell);
