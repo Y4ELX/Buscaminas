@@ -1,0 +1,87 @@
+body {
+    
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-image: url(img/fondo.png);
+    background-size: 20vh;
+    background-repeat: repeat;
+    background-position: center;
+
+    margin: 0px;
+    height: 100vh;
+
+}
+
+#minesweeper {
+    border-radius: 3vh;
+    border: solid 2vh #4a752c;
+    height: 80vh;
+    width: 80vh;
+    box-shadow: 0px 0px 3vh #353535b0;
+    border-radius: 2vh;
+    display: grid;
+    grid-template-columns: repeat(10, 4vh);
+    grid-row-gap: 0vh;
+    grid-column-gap: 4vh;
+}
+
+@font-face {
+    font-family: pfont;
+    src: url(font/pixelart.ttf);
+}
+
+.cell1 {
+    font-family: pfont;
+    color: #dc9d78;
+    font-size: 4vh;
+    width: 8vh;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #A2D149;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+}
+
+.cell2 {
+    font-family: pfont;
+    color: #dc9d78;
+    font-size: 4vh;
+    width: 8vh;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #AAD751;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+}
+
+.cell.revealed1 {
+    background-color: #e5c29f;
+    cursor: default;
+}
+
+.cell.revealed2 {
+    background-color: #d7b899;
+    cursor: default;
+}
+
+.cell.bomb {
+    
+}
+
+.cell.revealedBomb{
+    background-color: #91BA41;
+    background-image: url(img/bomb.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
