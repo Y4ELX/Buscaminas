@@ -66,9 +66,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (cell.classList.contains('bomb')) {
             revealAllMines(cell);
+
             setTimeout(() => {
                 location.reload();
-            }, (minesCount * 300) + 2000);
+            }, (minesCount * 400) + 2000);
+
             return;
         }
 
@@ -168,8 +170,12 @@ document.addEventListener("DOMContentLoaded", function () {
         // Luego revelar las demás bombas con un retraso de 200ms
         bombCells.forEach((cell, index) => {
             setTimeout(() => {
+                var bombSound = document.getElementById('bombSound');
+                bombSound.currentTime = 0; // Reinicia el tiempo del audio
+                bombSound.play()
+
                 cell.classList.add('revealedBomb');
-            }, index * 300); // 200ms de retraso por cada celda
+            }, index * 400); // 200ms de retraso por cada celda
         });
     }
 

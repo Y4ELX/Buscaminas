@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscaminas</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="img/bomb.png" type="image/x-icon">
 
     <link rel="preload" href="font/pixelart.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
 </head>
 
 <body>
+    <audio id="bombSound" src="sound/boom.mp3" preload="auto"></audio>
+
+    <div class="info"></div>
+
     <div id="minesweeper"></div>
     <script src="script.js"></script>
 
