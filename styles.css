@@ -69,6 +69,13 @@ body {
     cursor: default;
 }
 
+.cell.banderita {
+    background-image: url(img/flag.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .cell.revealed2 {
     background-color: #E2BC9C;
     cursor: default;
@@ -79,7 +86,7 @@ body {
 }
 
 .cell.revealedBomb{
-    background-color: #91BA41;
+    background-color: #D34A4A;
     background-image: url(img/bomb.png);
     background-size: cover;
     background-repeat: no-repeat;
