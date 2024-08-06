@@ -44,7 +44,7 @@ class Cell {
 class Game {
     static width = 10;
     static height = 10;
-    static minesCount = 9;
+    static minesCount = 10;
     static instance = null;
 
     constructor(gridElement) {
