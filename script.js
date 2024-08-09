@@ -5,21 +5,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const minesCount = 10;
     let cells = [];
     let mines = [];
-    let firstClick = true; // Variable para verificar si es el primer clic
+    let firstClick = true;
 
     function createGrid() {
-        // Crear celdas y añadirlas al grid
         for (let i = 0; i < width * height; i++) {
-            const cell = document.createElement('div'); // Crear una celda
-            cell.classList.add('cell'); // Añadir una clase común
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
 
-            // Alternar colores como en un tablero de ajedrez
             const row = Math.floor(i / width);
             const col = i % width;
             if ((row + col) % 2 === 0) {
-                cell.classList.add('cell1'); // Color de celda 1
+                cell.classList.add('cell1');
             } else {
-                cell.classList.add('cell2'); // Color de celda 2
+                cell.classList.add('cell2');
             }
 
             cell.setAttribute('data-id', i);
@@ -29,19 +27,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         cells.forEach(cell => {
             cell.addEventListener('click', revealCell);
-            
-
             cell.addEventListener('mousedown', function (event) {
-                if (event.button === 2) { // 2 corresponde al botón derecho del mouse
-                    event.preventDefault(); // Previene el menú contextual del navegador
+                if (event.button === 2) {
+                    event.preventDefault();
                     if (cell.classList.contains('banderita')) {
-                        cell.classList.remove('banderita')
+                        cell.classList.remove('banderita');
                     } else {
-                        cell.classList.add('banderita')
-                    }                
+                        cell.classList.add('banderita');
+                    }
                 }
             });
-            
             cell.addEventListener('contextmenu', flagCell);
         });
     }
@@ -50,14 +45,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const cell = event.target;
 
         if (firstClick) {
-            // En el primer clic, colocar las minas
             placeMines(cell);
-            firstClick = false; // Marca que el primer clic ya ha ocurrido
+            firstClick = false;
         }
 
         if (cell.classList.contains('revealed1') || cell.classList.contains('flagged')) return;
 
-        // Mantener el patrón de ajedrez para celdas reveladas
         if (cell.classList.contains('cell1')) {
             cell.classList.add('revealed1');
         } else if (cell.classList.contains('cell2')) {
@@ -66,11 +59,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (cell.classList.contains('bomb')) {
             revealAllMines(cell);
-
             setTimeout(() => {
                 location.reload();
             }, (minesCount * 400) + 2000);
-
             return;
         }
 
@@ -80,29 +71,35 @@ document.addEventListener("DOMContentLoaded", function () {
             cell.textContent = surroundingMines;
             switch (cell.textContent) {
                 case "1":
-                    cell.style.color = "#257bd0"
+                    cell.style.color = "#257bd0";
                     break;
                 case "2":
-                    cell.style.color = "#419142"
+                    cell.style.color = "#419142";
                     break;
                 case "3":
-                    cell.style.color = "#d33030"
+                    cell.style.color = "#d33030";
+                    break;
+                case "4":
+                    cell.style.color = "#020084";
+                    break;
+                case "5":
+                    cell.style.color = "#810102";
+                    break;
+                case "6":
+                    cell.style.color = "#00807f";
                     break;
             }
         } else {
             revealSurroundingCells(id);
         }
 
-        // Verificar si el jugador ha ganado
         checkWin();
     }
 
     function placeMines(firstClickCell) {
-        // Limpiar minas existentes
         mines = [];
         cells.forEach(cell => cell.classList.remove('bomb'));
 
-        // Colocar minas en celdas que no sean la primera clicada
         while (mines.length < minesCount) {
             const mineIndex = Math.floor(Math.random() * cells.length);
             if (!mines.includes(mineIndex) && cells[mineIndex] !== firstClickCell) {
@@ -162,25 +159,21 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // Revelar primero la bomba descubierta
         if (discoveredBombCell) {
             discoveredBombCell.classList.add('revealedBomb');
         }
 
-        // Luego revelar las demás bombas con un retraso de 200ms
         bombCells.forEach((cell, index) => {
             setTimeout(() => {
                 var bombSound = document.getElementById('bombSound');
-                bombSound.currentTime = 0; // Reinicia el tiempo del audio
-                bombSound.play()
-
+                bombSound.currentTime = 0;
+                bombSound.play();
                 cell.classList.add('revealedBomb');
-            }, index * 400); // 200ms de retraso por cada celda
+            }, index * 400);
         });
     }
 
     function checkWin() {
-        // Verificar si todas las celdas que no son minas han sido reveladas
         const allRevealed = cells.every(cell => {
             return cell.classList.contains('bomb') || cell.classList.contains('revealed1') || cell.classList.contains('revealed2');
         });

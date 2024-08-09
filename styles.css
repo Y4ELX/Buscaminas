@@ -81,10 +81,6 @@ body {
     cursor: default;
 }
 
-.cell.bomb {
-    
-}
-
 .cell.revealedBomb{
     background-color: #D34A4A;
     background-image: url(img/bomb.png);
