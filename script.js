@@ -1,11 +1,27 @@
 document.addEventListener("DOMContentLoaded", function () {
     const grid = document.getElementById('minesweeper');
+    const ganaste = document.getElementById('ganaste');
+    const perdiste = document.getElementById('perdiste');
+    const tiempoP = document.getElementById('tiempoP');
+    const tiempoG = document.getElementById('tiempoG');
     const width = 10;
     const height = 10;
     const minesCount = 10;
     let cells = [];
     let mines = [];
     let firstClick = true;
+    let flaggedCells = []; // ArrayList equivalent
+    let revealedCellsStack = []; // Stack equivalent
+
+    var segundos = 0;
+
+    function empezarTimer() {
+        intervalId = setInterval(function () {
+            segundos++;
+        }, 1000);
+    }
+
+    empezarTimer();
 
     function createGrid() {
         for (let i = 0; i < width * height; i++) {
@@ -32,8 +48,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     event.preventDefault();
                     if (cell.classList.contains('banderita')) {
                         cell.classList.remove('banderita');
+                        flaggedCells = flaggedCells.filter(c => c !== cell); // Remove from flaggedCells
                     } else {
                         cell.classList.add('banderita');
+                        flaggedCells.push(cell); // Add to flaggedCells
                     }
                 }
             });
@@ -51,6 +69,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (cell.classList.contains('revealed1') || cell.classList.contains('flagged')) return;
 
+        revealedCellsStack.push(cell); // Add to revealedCellsStack
+
         if (cell.classList.contains('cell1')) {
             cell.classList.add('revealed1');
         } else if (cell.classList.contains('cell2')) {
@@ -58,10 +78,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (cell.classList.contains('bomb')) {
+            document.getElementById("minesweeper").style.pointerEvents = "none";
+            const minutos = Math.floor(segundos / 60);
+            const secs = segundos % 60;
+            tiempoP.innerText = `${minutos.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            console.log("perdiste");
+
             revealAllMines(cell);
             setTimeout(() => {
-                location.reload();
-            }, (minesCount * 400) + 2000);
+                perdiste.classList.add('perder');
+            }, (minesCount * 400));
             return;
         }
 
@@ -148,6 +174,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const cell = event.target;
         if (cell.classList.contains('revealed1')) return;
         cell.classList.toggle('flagged');
+        if (cell.classList.contains('flagged')) {
+            flaggedCells.push(cell); // Add to flaggedCells
+        } else {
+            flaggedCells = flaggedCells.filter(c => c !== cell); // Remove from flaggedCells
+        }
     }
 
     function revealAllMines(discoveredBombCell) {
@@ -165,9 +196,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         bombCells.forEach((cell, index) => {
             setTimeout(() => {
-                var bombSound = document.getElementById('bombSound');
-                bombSound.currentTime = 0;
-                bombSound.play();
+                if (index < 8) {
+                    var bombSound = document.getElementById('bombSound');
+                    bombSound.currentTime = 0;
+                    bombSound.play();
+                }
                 cell.classList.add('revealedBomb');
             }, index * 400);
         });
@@ -179,7 +212,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (allRevealed) {
+            document.getElementById("minesweeper").style.pointerEvents = "none";
             console.log("Ganaste");
+            ganaste.classList.add('ganar');
+            const minutos = Math.floor(segundos / 60);
+            const secs = segundos % 60;
+            tiempoG.innerText = `${minutos.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            console.log("GANASTE");
         }
     }
 

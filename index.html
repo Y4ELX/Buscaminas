@@ -12,7 +12,7 @@
 
 </head>
 
-<body>
+<body id="body">
     <audio id="bombSound" src="sound/boom.mp3" preload="auto"></audio>
 
     <div class="info"></div>
@@ -20,6 +20,99 @@
     <div id="minesweeper"></div>
     <script src="script.js"></script>
 
+    <div id="ganaste" class="ganaste">
+        <div onclick="cerrar()"
+            style="gap: 0.7vh; position: absolute; display: flex; flex-direction: row; justify-content: end; align-items: center; top: 0; left: 0; height: 5vh; width: 100%; background-color: #0060FC;">
+            <button
+                style="text-align: center; align-items: center; color: white; width: 4vh; height: 4vh; font-family: pfont; border: solid 0.2vh white; background-color: #186EF7; border-radius: 1vh;">_</button>
+            <button
+                style="text-align: center; align-items: center; color: #87AEFA; width: 4vh; height: 4vh; font-family: pfont; border: solid 0.2vh #87AEFA; background-color: #186EF7; border-radius: 1vh;">🗖</button>
+            <button
+                style="text-align: center; align-items: center; color: white; width: 4vh; height: 4vh; font-family: pfont; border: solid 0.2vh white; background-color: #E34C1C; border-radius: 1vh;">X</button>
+        </div>
+
+        <div style="padding-left: 0.7vh; font-size: 2vh; font-family: pfont; color: black; gap: 0.7vh; position: absolute; display: flex; flex-direction: row; justify-content: start; align-items: center; top: 5vh; left: 0; height: 5vh; width: calc(100% - 0.7vh); background-color: #ECE9D8;">
+            <p>
+                Yael
+            </p>
+            <p>
+                Chipi
+            </p>
+            <p>
+                Torres
+            </p>
+        </div>
+
+        <p style="font-family: pfont; font-size: 4vh; margin: 3vh 0px 0px 0px ;">Ganaste!!</p>
+
+        <div style=" border: outset; padding: 2vh; display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 2vh;">
+            <div style="padding: 1vh; text-shadow: 0px 0px 2vh #ff0000b5; background-color: black; ">
+                <p id="bombasResG" style="padding: 0; margin: 0; font-family: pfont; font-size: 4vh; color: #FF0000;">0010</p>
+            </div>
+            <img src="img/ganaste.png" style="width: 6vh; height: fit-content;" alt="">
+            <div style="padding: 1vh;  text-shadow: 0px 0px 2vh #ff0000b5; background-color: black; ">
+                <p id="tiempoG" style="padding: 0; margin: 0; font-family: pfont; font-size: 4vh; color: #FF0000;">00:00</p>
+            </div>
+        </div>
+
+        <button onclick="location.reload()" style=" cursor: pointer; margin-top: 3vh; font-size: 4vh; font-family: pfont; border: outset;  background-color: #c0c0c0;">
+            Jugar de nuevo
+        </button>
+    
+    </div>
+
+
+    <div id="perdiste" class="perdiste">
+        <div 
+            style="gap: 0.7vh; position: absolute; display: flex; flex-direction: row; justify-content: end; align-items: center; top: 0; left: 0; height: 5vh; width: 100%; background-color: #0060FC;">
+            <button
+                style="text-align: center; align-items: center; color: white; width: 4vh; height: 4vh; font-family: pfont; border: solid 0.2vh white; background-color: #186EF7; border-radius: 1vh;">_</button>
+            <button
+                style="text-align: center; align-items: center; color: #87AEFA; width: 4vh; height: 4vh; font-family: pfont; border: solid 0.2vh #87AEFA; background-color: #186EF7; border-radius: 1vh;">🗖</button>
+            <button onclick="cerrar()"
+                style="text-align: center; align-items: center; color: white; width: 4vh; height: 4vh; font-family: pfont; border: solid 0.2vh white; background-color: #E34C1C; border-radius: 1vh;">X</button>
+        </div>
+
+        <div style="padding-left: 0.7vh; font-size: 2vh; font-family: pfont; color: black; gap: 0.7vh; position: absolute; display: flex; flex-direction: row; justify-content: start; align-items: center; top: 5vh; left: 0; height: 5vh; width: calc(100% - 0.7vh); background-color: #ECE9D8;">
+            <p>
+                Yael
+            </p>
+            <p>
+                Chipi
+            </p>
+            <p>
+                Torres
+            </p>
+        </div>
+
+        <p style="font-family: pfont; font-size: 4vh; margin: 3vh 0px 0px 0px ;">Perdiste</p>
+
+        <div style=" border: outset; padding: 2vh; display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 2vh;">
+            <div style="padding: 1vh; text-shadow: 0px 0px 2vh #ff0000b5; background-color: black; ">
+                <p id="bombasResP" style="padding: 0; margin: 0; font-family: pfont; font-size: 4vh; color: #FF0000;">0010</p>
+            </div>
+            <img src="img/perdiste.png" style="width: 6vh; height: fit-content;" alt="">
+            <div style="padding: 1vh;  text-shadow: 0px 0px 2vh #ff0000b5; background-color: black; ">
+                <p id="tiempoP" style="padding: 0; margin: 0; font-family: pfont; font-size: 4vh; color: #FF0000;">00:00</p>
+            </div>
+        </div>
+
+        <button onclick="location.reload()" style=" cursor: pointer; margin-top: 3vh; font-size: 4vh; font-family: pfont; border: outset;  background-color: #c0c0c0;">
+            Jugar de nuevo
+        </button>
+    </div>
+
 </body>
 
+<script>
+    function cerrar() {
+        try {
+            document.getElementById("perdiste").style.display = "none"
+            document.getElementById("ganaste").style.display = "none"
+            document.getElementById("body").style.pointerEvents= "none"
+        }catch(error){
+            console.log(error)
+        }
+    }
+</script>
 </html>
