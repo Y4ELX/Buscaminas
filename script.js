@@ -4,14 +4,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const perdiste = document.getElementById('perdiste');
     const tiempoP = document.getElementById('tiempoP');
     const tiempoG = document.getElementById('tiempoG');
+
     const width = 20;
     const height = 10;
     const minesCount = 10;
     let cells = [];
     let mines = [];
     let firstClick = true;
-    let flaggedCells = []; // ArrayList equivalent
-    let revealedCellsStack = []; // Stack equivalent
+    let flaggedCells = [];
+    let revealedCellsStack = [];
 
     var segundos = 0;
 
@@ -28,8 +29,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const cell = document.createElement('div');
             cell.classList.add('cell');
 
-            const row = Math.floor(i / width);
-            const col = i % width;
+            const row = Math.floor(i / width); //0
+            const col = i % width;              //1
+
             if ((row + col) % 2 === 0) {
                 cell.classList.add('cell1');
             } else {
@@ -43,15 +45,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         cells.forEach(cell => {
             cell.addEventListener('click', revealCell);
+
             cell.addEventListener('mousedown', function (event) {
                 if (event.button === 2) {
                     event.preventDefault();
+                    
                     if (cell.classList.contains('banderita')) {
                         cell.classList.remove('banderita');
-                        flaggedCells = flaggedCells.filter(c => c !== cell); // Remove from flaggedCells
+                        flaggedCells = flaggedCells.filter(c => c !== cell);
                     } else {
                         cell.classList.add('banderita');
-                        flaggedCells.push(cell); // Add to flaggedCells
+                        flaggedCells.push(cell);
                     }
                 }
             });
@@ -69,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (cell.classList.contains('revealed1') || cell.classList.contains('flagged')) return;
 
-        revealedCellsStack.push(cell); // Add to revealedCellsStack
+        revealedCellsStack.push(cell);
 
         if (cell.classList.contains('cell1')) {
             cell.classList.add('revealed1');
@@ -124,10 +128,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function placeMines(firstClickCell) {
         mines = [];
-        cells.forEach(cell => cell.classList.remove('bomb'));
 
-        while (mines.length < minesCount) {
+        while(mines.length < minesCount) {
             const mineIndex = Math.floor(Math.random() * cells.length);
+            
             if (!mines.includes(mineIndex) && cells[mineIndex] !== firstClickCell) {
                 mines.push(mineIndex);
                 cells[mineIndex].classList.add('bomb');
@@ -175,9 +179,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (cell.classList.contains('revealed1')) return;
         cell.classList.toggle('flagged');
         if (cell.classList.contains('flagged')) {
-            flaggedCells.push(cell); // Add to flaggedCells
+            flaggedCells.push(cell);
         } else {
-            flaggedCells = flaggedCells.filter(c => c !== cell); // Remove from flaggedCells
+            flaggedCells = flaggedCells.filter(c => c !== cell);
         }
     }
 
