@@ -10,8 +10,7 @@ Instrucciones para ejecutar el juego
 Descargar el proyecto:
 
 Clona el repositorio o descarga el proyecto como un archivo ZIP y extráelo en tu computadora.
-bash
-Copiar código
+
 git clone https://github.com/Y4ELX/Buscaminas.git
 Navegar a la carpeta del proyecto:
 
@@ -19,7 +18,6 @@ Abre la carpeta del proyecto donde se encuentran los archivos index.html, styles
 Abrir el juego en un navegador:
 
 Haz doble clic en el archivo index.html para abrirlo en tu navegador web preferido.
-O
 
 Abre el archivo index.html desde tu editor de texto y utiliza la opción de "Vista previa en el navegador" para abrir el juego.
 Instrucciones del juego:
