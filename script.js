@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const perdiste = document.getElementById('perdiste');
     const tiempoP = document.getElementById('tiempoP');
     const tiempoG = document.getElementById('tiempoG');
-    const width = 10;
+    const width = 20;
     const height = 10;
     const minesCount = 10;
     let cells = [];
