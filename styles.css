@@ -1,194 +1,192 @@
-body {
-
+body{
     user-select: none;
-    
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; /* Define la fuente de la página */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    background-image: url(img/fondo.png);
-    background-size: 20vh;
-    background-repeat: repeat;
-    background-position: center;
+    background-image: url(img/fondo.png); /* Imagen de fondo */
+    background-size: 20vh;  /* Tamaño del fondo */
+    background-repeat: repeat; /* Repite el fondo */
+    background-position: center; /* Centra la imagen de fondo */
 
-    margin: 0px;
-    height: 100vh;
+    margin: 0px; /* Elimina el margen predeterminado */
+    height: 100vh; /* Altura de la página completa */
 
 }
-
+/* Estilos para el mensaje de "Ganaste" */
 .ganaste {
-    position: absolute;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    position: absolute; /* Posición absoluta en la página */
+    flex-direction: column; /* Organiza los hijos en una columna */
+    justify-content: center; /* Centra los hijos verticalmente */
+    align-items: center; /* Centra los hijos horizontalmente */
 
-    gap: 2vh;
+    gap: 2vh; /* Espacio entre los elementos */
 
-    background-color: #C0C0C0;
+    background-color: #C0C0C0; /* Color de fondo gris */
 
-    box-shadow: 0px 1vh 2vh rgba(0, 0, 0, 0.379);
-    border: solid 1vh #0060FC;
-    border-radius: 1vh;
-    width: 0vh;
-    height: 0vh;
-    padding: 5vh;
+    box-shadow: 0px 1vh 2vh rgba(0, 0, 0, 0.379); /* Sombra para darle profundidad */
+    border: solid 1vh #0060FC; /* Borde azul */
+    border-radius: 1vh; /* Bordes redondeados */
+    width: 0vh; /* Ancho inicial 0 */
+    height: 0vh;  /* Altura inicial 0 */
+    padding: 5vh; /* Espacio interior del contenedor */
 
-    visibility: hidden;
-    opacity: 0;
-    transition: width 0.7s ease-out, height 0.7s ease-out, visibility 0s 0.7s, opacity 0.7s ease-out;
+    visibility: hidden; /* Oculto inicialmente */
+    opacity: 0; /* Transparente inicialmente */
+    transition: width 0.7s ease-out, height 0.7s ease-out, visibility 0s 0.7s, opacity 0.7s ease-out; /* Transiciones suaves para mostrar el mensaje */
 }
-
+/* Estilos adicionales cuando el jugador gana */
 .ganaste.ganar {
-    width: 35vh;
-    height: 45vh;
-    visibility: visible;
-    opacity: 1;
-    display: flex;
+    width: 35vh; /* Ancho del contenedor cuando se gana */
+    height: 45vh; /* Altura del contenedor cuando se gana */
+    visibility: visible;  /* Se hace visible */
+    opacity: 1; /* Se vuelve opaco */
+    display: flex; /* Muestra los elementos hijos en flexbox */
 
-    transition: width 0.7s ease-out, height 0.7s ease-out, opacity 0.7s ease-out;
+    transition: width 0.7s ease-out, height 0.7s ease-out, opacity 0.7s ease-out; /* Transiciones al mostrar el mensaje */
 }
 
-/* Para los elementos hijos */
+/* Animación para la aparición de los elementos hijos */
 .ganaste>* {
-    opacity: 0;
-    animation: fadeIn 2.5s ease-in;
+    opacity: 0;  /* Inicialmente los hijos son transparentes */
+    animation: fadeIn 2.5s ease-in;  /* Animación para que los hijos aparezcan gradualmente */
 }
-
+/* Definición de la animación de aparición gradual */
 @keyframes fadeIn {
     0% {
-        opacity: 0;
+        opacity: 0; /* Comienza siendo invisible */
     }
 
     90% {
-        opacity: 0;
+        opacity: 0; /* Mantiene invisibilidad hasta casi el final */
     }
 
     100% {
-        opacity: 1;
+        opacity: 1; /* Se vuelve visible al final */
     }
 }
-
+/* Cuando el jugador gana, los elementos hijos se hacen visibles */
 .ganaste.ganar>* {
-    opacity: 1;
+    opacity: 1; /* Los hijos se vuelven completamente visibles */
 }
-
+/* Estilos para el tablero de juego (minesweeper) */
 #minesweeper {
-    border-radius: 3vh;
-    border: solid 2vh #4a752c;
-    height: 80vh;
-    width: 160vh;
-    box-shadow: 0px 0px 3vh #0000006e;
-    border-radius: 2vh;
-    display: grid;
-    grid-template-columns: repeat(20, 4vh);
-    grid-row-gap: 0vh;
-    grid-column-gap: 4vh;
+    border-radius: 3vh; /* Bordes redondeados del tablero */
+    border: solid 2vh #4a752c;  /* Borde verde oscuro */
+    height: 80vh; /* Altura del tablero */
+    width: 160vh; /* Ancho del tablero */
+    box-shadow: 0px 0px 3vh #0000006e; /* Sombra para darle profundidad */
+    border-radius: 2vh; /* Bordes redondeados */
+    display: grid; /* Define el tablero como una cuadrícula */
+    grid-template-columns: repeat(20, 4vh); /* Crea 20 columnas iguales */
+    grid-row-gap: 0vh;  /* Sin espacio entre filas */
+    grid-column-gap: 4vh; /* Espacio entre columnas */
 }
-
+/* Define una fuente personalizada para el juego */
 @font-face {
     font-family: pfont;
-    src: url(font/pixelart.ttf);
+    src: url(font/pixelart.ttf); /* Fuente personalizada (estilo pixel art) */
 }
-
+/* Estilos para las celdas de tipo 1 */
 .cell1 {
-    font-family: pfont;
-    color: #dc9d78;
-    font-size: 4vh;
-    width: 8vh;
-    height: 8vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #A2D149;
-    cursor: pointer;
-    user-select: none;
-    border: none;
+    font-family: pfont; /* Aplica la fuente personalizada */
+    color: #dc9d78; /* Color del texto */
+    font-size: 4vh; /* Tamaño de la fuente */
+    width: 8vh;  /* Ancho de la celda */
+    height: 8vh; /* Altura de la celda */
+    display: flex; /* Flexbox para centrar el contenido */
+    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    background-color: #A2D149;  /* Color de fondo */
+    cursor: pointer; /* Cambia el cursor al pasar sobre la celda */
+    user-select: none;  /* Desactiva la selección de texto */
+    border: none;  /* Sin bordes */
 }
-
+/* Estilos para las celdas de tipo 2 */
 .cell2 {
-    font-family: pfont;
-    color: #dc9d78;
-    font-size: 4vh;
-    width: 8vh;
-    height: 8vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #AAD751;
-    cursor: pointer;
-    user-select: none;
-    border: none;
+    font-family: pfont; /* Aplica la fuente personalizada */
+    color: #dc9d78;  /* Color del texto */
+    font-size: 4vh; /* Tamaño de la fuente */
+    width: 8vh; /* Ancho de la celda */
+    height: 8vh; /* Altura de la celda */
+    display: flex; /* Flexbox para centrar el contenido */
+    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    background-color: #AAD751; /* Color de fondo */
+    cursor: pointer; /* Cambia el cursor al pasar sobre la celda */
+    user-select: none; /* Desactiva la selección de texto */
+    border: none; /* Sin bordes */
 }
-
+/* Estilos para celdas reveladas de tipo 1 */
 .cell.revealed1 {
-    background-color: #e5c29f;
-    cursor: default;
+    background-color: #e5c29f; /* Color de fondo cuando se revela */
+    cursor: default; /* Cambia el cursor cuando se revela */
 }
-
+/* Estilos para celdas marcadas con una bandera */
 .cell.banderita {
-    background-image: url(img/flag.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    background-image: url(img/flag.png); /* Imagen de la bandera */
+    background-size: cover; /* Abarca toda la celda */
+    background-repeat: no-repeat; /* No repite la imagen */
+    background-position: center;  /* Centra la imagen en la celda */
 }
-
+/* Estilos para celdas reveladas de tipo 2 */
 .cell.revealed2 {
-    background-color: #E2BC9C;
-    cursor: default;
+    background-color: #E2BC9C; /* Color de fondo cuando se revela */
+    cursor: default; /* Cambia el cursor cuando se revela */
 }
-
+/* Oculta elementos con esta clase */
 .hidden {
-    visibility: hidden;
+    visibility: hidden; /* Los elementos son invisibles */
 }
-
+/* Estilos para celdas que contienen bombas */
 .cell.revealedBomb{
-    background-color: #D34A4A;
-    background-image: url(img/bomb.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    background-color: #D34A4A; /* Color de fondo rojo para las bombas */
+    background-image: url(img/bomb.png); /* Imagen de la bomba */
+    background-size: cover; /* Abarca toda la celda */
+    background-repeat: no-repeat; /* No repite la imagen */
+    background-position: center; /* Centra la imagen en la celda */
 }
-
+/* Estilos para el mensaje de "Perdiste" */
 .perdiste {
-    position: absolute;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    position: absolute; /* Posición absoluta en la página */
+    flex-direction: column; /* Organiza los hijos en una columna */
+    justify-content: center; /* Centra los hijos verticalmente */
+    align-items: center; /* Centra los hijos horizontalmente */
 
-    gap: 2vh;
+    gap: 2vh; /* Espacio entre los elementos */
 
-    background-color: #C0C0C0;
+    background-color: #C0C0C0; /* Color de fondo gris */
 
-    box-shadow: 0px 1vh 2vh rgba(0, 0, 0, 0.379);
-    border: solid 1vh #0060FC;
-    border-radius: 1vh;
-    width: 0vh;
-    height: 0vh;
-    padding: 5vh;
+    box-shadow: 0px 1vh 2vh rgba(0, 0, 0, 0.379);  /* Sombra para darle profundidad */
+    border: solid 1vh #0060FC; /* Borde azul */
+    border-radius: 1vh; /* Bordes redondeados */
+    width: 0vh; /* Ancho inicial 0 */
+    height: 0vh; /* Altura inicial 0 */
+    padding: 5vh; /* Espacio interior del contenedor */
 
-    visibility: hidden;
-    opacity: 0;
-    transition: width 0.7s ease-out, height 0.7s ease-out, visibility 0s 0.7s, opacity 0.7s ease-out;
+    visibility: hidden; /* Oculto inicialmente */
+    opacity: 0; /* Transparente inicialmente */
+    transition: width 0.7s ease-out, height 0.7s ease-out, visibility 0s 0.7s, opacity 0.7s ease-out;  /* Transiciones suaves para mostrar el mensaje */
 }
-
+/* Estilos adicionales cuando el jugador pierde */
 .perdiste.perder {
-    width: 35vh;
-    height: 45vh;
-    visibility: visible;
-    opacity: 1;
-    display: flex;
+    width: 35vh; /* Ancho del contenedor cuando se pierde */
+    height: 45vh; /* Altura del contenedor cuando se pierde */
+    visibility: visible;  /* Se hace visible */
+    opacity: 1; /* Se vuelve opaco */
+    display: flex; /* Muestra los elementos hijos en flexbox */
 
-    transition: width 0.7s ease-out, height 0.7s ease-out, opacity 0.7s ease-out;
+    transition: width 0.7s ease-out, height 0.7s ease-out, opacity 0.7s ease-out; /* Transiciones al mostrar el mensaje */
 }
 
-/* Para los elementos hijos */
+/* Animación para la aparición de los elementos hijos */
 .perdiste>* {
-    opacity: 0;
-    animation: fadeIn 2.5s ease-in;
+    opacity: 0; /* Inicialmente los hijos son transparentes */
+    animation: fadeIn 2.5s ease-in; /* Animación para que los hijos aparezcan gradualmente */
 }
-
+/* Cuando el jugador pierde, los elementos hijos se hacen visibles */
 .perdiste.perder>* {
-    opacity: 1;
+    opacity: 1; /* Los hijos se vuelven completamente visibles */
 }
